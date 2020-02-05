@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
   ],
   password: [
     { type: "required", message: "El password es requerido" },
-    { type: "pattern", message: "Minimo 5 caracteres" }
+    { type: "minlength", message: "Minimo 5 caracteres" }
   ]};
 
   errorMessage: string ="";
@@ -52,6 +52,12 @@ export class LoginPage implements OnInit {
     }).catch(err=>{
       this.errorMessage = err;
     });
+  }
+
+
+  goToRegister(){
+
+    this.navCtrl.navigateForward("/register");
   }
 
 }
