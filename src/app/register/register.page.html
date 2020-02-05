@@ -1,5 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)="goToLogin()">
+        Back
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <figure text-center padding>
+  <figure class="ion-text-center ion-padding" >
     <img src="assets/img/logo-arc.png" alt="">
   </figure>
   <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
