@@ -12,7 +12,7 @@ export class AuthenticateService {
     const user = await this.storage.get("user");
     return new Promise((accept, reject) => {
       //return fetch("URL_SERVICIO_EXISTENTE")
-        if (credentials.email == user.email  && credentials.password == user.password) {
+        if (credentials.email == user.email  && btoa(credentials.password) == user.password) {
           accept("Login correcto");
         } else {
           reject("Login incorrecto");
