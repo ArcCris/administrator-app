@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule),
     canActivate:[IntroGuard, LoginGuard]
   },
+  {
+    path: 'carta-modal',
+    loadChildren: () => import('./carta-modal/carta-modal.module').then( m => m.CartaModalPageModule)
+  },
 ];
 
 @NgModule({
