@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { AuthenticateService } from '../services/authenticate.service';
 import { NavController } from '@ionic/angular';
@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
 
   registerForm: FormGroup;
   validation_messages = {
@@ -57,9 +57,6 @@ export class RegisterPage implements OnInit {
         Validators.compose([Validators.required, Validators.minLength(5)])
       )
     });
-  }
-
-  ngOnInit() {
   }
 
   register(userData) {

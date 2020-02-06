@@ -19,11 +19,17 @@ export class HomePage {
   songs: any[] = [];
   albums: any[] = [];
   artists: any[] = [];
-  song = {};
-  currentSong = {};
+  song: {
+    preview_url: string;
+    playing: boolean;
+    name: string;
+  }={
+    preview_url:"",
+    playing:false,
+    name:""
+  };
+  currentSong : HTMLAudioElement;
   newTime;
-  status = false;
-  nameSong = "";
 
   constructor(private cartaService: CartaService, private modalController: ModalController) { }
 
@@ -76,16 +82,14 @@ export class HomePage {
     });
 
     this.song.playing = true;
-    this.status = this.song.playing;
   }
 
   pause() {
     this.currentSong.pause();
     this.song.playing = false;
-    this.status = this.song.playing;
   }
 
-  parseTime(time = "0.00") {
+  parseTime(time : number) {
     if (time) {
       const partTime = parseInt(time.toString().split(".")[0], 10);
       let minutes = Math.floor(partTime / 60).toString();
@@ -103,13 +107,10 @@ export class HomePage {
   reproductor(dataReturned){
     if (dataReturned.data !== undefined) {
       this.song = dataReturned.data;
-      this.nameSong = this.song.name;
-      if(this.status){
+      if(this.song.playing){
         this.pause();
       }
       this.play();
-    } else {
-      this.nameSong = "No hay seleccion";
     }
   }
 }

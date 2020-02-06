@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 
@@ -7,7 +7,7 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
 })
-export class SettingsPage implements OnInit {
+export class SettingsPage{
 
   userImage = "assets/img/user.png";
   photo: SafeResourceUrl;
@@ -15,7 +15,6 @@ export class SettingsPage implements OnInit {
 
   constructor(private sanitizer: DomSanitizer) { }
 
-  ngOnInit() { }
 
   async takePhoto() {
     const image = await Plugins.Camera.getPhoto({
