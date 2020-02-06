@@ -1,39 +1,69 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
-<ion-menu-button></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-<h1>Entradas</h1>
-<ion-slides [options]="slideOps" *ngIf="artists.length">
-  <ion-slide *ngFor="let artist of artists">
-    <ion-avatar (click)="showSongs(artist)">
-      <img [src]="artist.images[0].url" />
-      <span>{{artist.name}}</span>
-    </ion-avatar>
-  </ion-slide>
-</ion-slides>
+  <h1>Entradas</h1>
+  <ion-slides [options]="slideOps" *ngIf="artists.length">
+    <ion-slide *ngFor="let artist of artists">
+      <ion-avatar (click)="showSongs(artist)">
+        <img [src]="artist.images[0].url" />
+        <span>{{artist.name}}</span>
+      </ion-avatar>
+    </ion-slide>
+  </ion-slides>
 
-<h1>Aperitivos</h1>
-<ion-slides [options]="slideOps" *ngIf="albums.length">
-  <ion-slide *ngFor="let album of albums">
-    <ion-avatar class="square-avatar">
-      <img [src]="album.images[0].url" />
-      <span>{{album.name}}</span>
-    </ion-avatar>
-  </ion-slide>
-</ion-slides>
+  <h1>Aperitivos</h1>
+  <ion-slides [options]="slideOps" *ngIf="albums.length">
+    <ion-slide *ngFor="let album of albums">
+      <ion-avatar class="square-avatar" (click)="showAlbums(album)">
+        <img [src]="album.images[0].url" />
+        <span>{{album.name}}</span>
+      </ion-avatar>
+    </ion-slide>
+  </ion-slides>
 
-<h1>Postres</h1>
-<ion-slides [options]="slideOps" *ngIf="songs.length">
-  <ion-slide *ngFor="let song of songs">
-    <ion-avatar class="square-avatar">
-      <img [src]="song.images[0].url" />
-      <span>{{song.name}}</span>
-    </ion-avatar>
-  </ion-slide>
-</ion-slides>
+  <h1>Postres</h1>
+  <ion-slides [options]="slideOps" *ngIf="songs.length">
+    <ion-slide *ngFor="let song of songs">
+      <ion-avatar class="square-avatar">
+        <img [src]="song.images[0].url" />
+        <span>{{song.name}}</span>
+      </ion-avatar>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
+
+<ion-footer>
+  <!-- <ion-text color="danger" *ngIf="!song.name">
+    <h2>Aqui aparecera nuestra cancion.</h2>
+  </ion-text>
+  <ion-text color="primary" *ngIf="song">
+    <h2>{{song.name}}</h2>
+  </ion-text> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-start">{{parseTime(currentSong.currentTime) || "0:00"}}</ion-col>
+      <ion-col class="ion-text-end">{{parseTime(currentSong.duration) || "0:00"}}</ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-progress-bar [value]="newTime"></ion-progress-bar>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="1">
+        <ion-icon name="heart"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <ion-text>{{nameSong || "No hay seleccion"}}</ion-text>
+      </ion-col>
+      <ion-col size="1">
+        <ion-icon name="play" (click)="play()" *ngIf="!status"></ion-icon>
+        <ion-icon name="pause" (click)="pause()" *ngIf="status"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
