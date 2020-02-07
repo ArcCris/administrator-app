@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">arcadministrator</string>
+    <string name="title_activity_main">arcadministrator</string>
+    <string name="package_name">arc.admin.cris</string>
+    <string name="custom_url_scheme">arc.admin.cris</string>
+</resources>

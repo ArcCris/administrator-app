@@ -9,16 +9,20 @@ import { NavParams, ModalController } from '@ionic/angular';
 export class CartaModalPage {
 
   songs: any[];
-  artists: string;
-
-  constructor(private navParams: NavParams, private modalController: ModalController) { }
-
+  artist: string;
+  constructor(
+    private navParams: NavParams,
+    private modalController: ModalController
+  ) {}
   ionViewDidEnter() {
     this.songs = this.navParams.data.songs;
-    this.artists = this.navParams.data.artist;
+    this.artist = this.navParams.data.artist;
   }
 
   async selectSong(song) {
     await this.modalController.dismiss(song);
+  }
+  async backSong() {
+    await this.modalController.dismiss();
   }
 }

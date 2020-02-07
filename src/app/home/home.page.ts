@@ -30,6 +30,9 @@ export class HomePage {
   };
   currentSong : HTMLAudioElement;
   newTime;
+  status = false;
+  nameSong = "";
+
 
   constructor(private cartaService: CartaService, private modalController: ModalController) { }
 
@@ -46,7 +49,7 @@ export class HomePage {
       component: CartaModalPage,
       componentProps: {
         songs: songs.tracks,
-        artist: artist.name
+        artist: artist.name +" - Top tracks"
       }
     });
 
@@ -63,10 +66,9 @@ export class HomePage {
       component: CartaModalPage,
       componentProps: {
         songs: album.items,
-        artist: album.items.artists
+        artist: artist.name +" - Album"
       }
     });
-
     modal.onDidDismiss().then(dataReturned => {
       this.reproductor(dataReturned);
     });
@@ -80,13 +82,14 @@ export class HomePage {
     this.currentSong.addEventListener("timeupdate", () => {
       this.newTime = (this.currentSong.currentTime * (this.currentSong.duration / 10)) / 100;
     });
-
     this.song.playing = true;
+    this.status = this.song.playing;
   }
 
   pause() {
     this.currentSong.pause();
     this.song.playing = false;
+    this.status = this.song.playing;
   }
 
   parseTime(time : number) {
@@ -107,7 +110,7 @@ export class HomePage {
   reproductor(dataReturned){
     if (dataReturned.data !== undefined) {
       this.song = dataReturned.data;
-      if(this.song.playing){
+      if(this.status){
         this.pause();
       }
       this.play();
