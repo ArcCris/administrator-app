@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'carta-modal',
     loadChildren: () => import('./carta-modal/carta-modal.module').then( m => m.CartaModalPageModule)
+  },
+  {
+    path: 'administrator',
+    loadChildren: () => import('./administrator/administrator.module').then( m => m.AdministratorPageModule)
   }
 ];
 

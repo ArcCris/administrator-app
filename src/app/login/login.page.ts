@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthenticateService } from '../services/authenticate.service';
 import { NavController } from '@ionic/angular';
-import {Storage} from '@ionic/storage';
+import { Storage } from '@ionic/storage';
+import { AuthService } from "../services/auth/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -12,23 +13,26 @@ import {Storage} from '@ionic/storage';
 export class LoginPage {
 
   loginForm: FormGroup;
-  validation_messages = {email: [
-    { type: "required", message: "El email es requerido" },
-    { type: "pattern", message: "Correo no valido" }
-  ],
-  password: [
-    { type: "required", message: "El password es requerido" },
-    { type: "minlength", message: "Minimo 5 caracteres" }
-  ]};
+  validation_messages = {
+    email: [
+      { type: "required", message: "El email es requerido" },
+      { type: "pattern", message: "Correo no valido" }
+    ],
+    password: [
+      { type: "required", message: "El password es requerido" },
+      { type: "minlength", message: "Minimo 5 caracteres" }
+    ]
+  };
 
-  errorMessage: string ="";
+  errorMessage: string = "";
 
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private authService: AuthenticateService,
     private navCtrl: NavController,
-    private storage:Storage) {
+    private storage: Storage,
+    private authServiceAF: AuthService) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl("", Validators.compose([
         Validators.required,
@@ -41,20 +45,29 @@ export class LoginPage {
     });
   }
 
-  loginUser(credentials){
-    this.authService.loginUser(credentials).then(res=> {
-      this.errorMessage="";
+  loginUser(credentials) {
+    this.authService.loginUser(credentials).then(res => {
+      this.errorMessage = "";
       this.storage.set("isUserLoggedIn", true);
       this.navCtrl.navigateForward("/menu/home");
-    }).catch(err=>{
+    }).catch(err => {
       this.errorMessage = err;
     });
   }
 
-
-  goToRegister(){
+  goToRegister() {
 
     this.navCtrl.navigateForward("/register");
+  }
+
+  loginEmail(credentials) {
+    this.authServiceAF.loginAF(credentials.email, credentials.password).then(res=>{
+      this.errorMessage = "";
+      this.storage.set("isUserLoggedIn", true);
+      this.navCtrl.navigateForward("/menu/home");
+    }).catch(err => {
+      this.errorMessage = err;
+    });
   }
 
 }

@@ -14,22 +14,22 @@ export class IntroPage {
     centeredSlides: true,
     speed: 400
   }
-
+ 
   slides = [{
-    title: "Register",
-    description: "Join this community and dont forget share with your friendless",
-    icon: "person-add",
+    title: "Registrate",
+    description: "Registrate y conoce nuestros productos",
+    icon: "finger-print",
     final: ""
   },
   {
-    title: "Sign in",
-    description: "Into and you know more about ArcCris, get a lot discounts in food in the Restorants",
+    title: "Ingresa",
+    description: "Ve nuestras ofertas y recomendaciones del día.",
     icon: "walk",
     final: ""
   },
   {
-    title: "Enjoy!",
-    description: "Come with yours friend and take a good time, celebrate yours Birthday, Marrieges, and Graduations",
+    title: "Diviertete!",
+    description: "Invita a tus amigos a usar la app y obten descuentos",
     icon: "contacts",
     final: "arrow-round-forward"
   }];

@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Doctors App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list >
+    <ion-list-header>
+      Appointments
+    </ion-list-header>
+    <ion-item *ngFor="let booking of Bookings">
+      <ion-slides [options]="slideOpts">
+        <ion-slide class="update" (click)="actualiza(booking.name)" >
+          <div class="ion-text-center">
+            <ion-text>Update</ion-text>
+          </div>
+        </ion-slide>
+        <ion-slide class="cont-large">
+
+          <div class="detalle content-prod">
+            <div class="item-cal header">
+              <ion-label class="ion-text-left">
+                <h4>
+
+                  <ion-icon name="cart"></ion-icon> {{booking.name}}
+                </h4>
+
+              </ion-label>
+            </div>
+            <div class="item-cal footer">
+              <ion-label class="ion-text-left">
+                <h5>
+
+                  <ion-icon name="card"></ion-icon> {{booking.amount}}
+                </h5>
+
+              </ion-label>
+            </div>
+            <div class="item-cal side">
+                <img src="../../assets/img/user.png">
+            </div>
+          </div>
+        </ion-slide>
+        <ion-slide class="delete" (click)="elimina(booking.name)">
+          <div class="ion-text-center">
+            <ion-text>Delete</ion-text>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" shape="round">Agregar</ion-button>
+</ion-footer>
